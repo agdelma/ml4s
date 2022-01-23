@@ -146,7 +146,7 @@ def draw_network(num_node_list,node_labels=None,weights=None,biases=None,zero_in
 
 # --------------------------------------------------------------------------
 from IPython.core.display import HTML
-def _set_css_style(css_file_path):
+def set_css_style(css_file_path):
    """
    Read the custom CSS file and load it into Jupyter.
    Pass the file path to the CSS file.
