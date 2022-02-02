@@ -8,7 +8,7 @@ from viznet import connecta2a, node_sequence, NodeBrush, EdgeBrush, DynamicShow,
 
 # --------------------------------------------------------------------------
 def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=None, zero_index=False, 
-                     weight_thickness=False, feed_forward=True):
+                     weight_thickness=False, feed_forward=True,annotate=True):
     '''
     draw a feed forward neural network.
 
@@ -28,6 +28,16 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
     
     shift = not zero_index
 
+    if weight_thickness and (weights is None or weights == []):
+        print("Can't show weight thicknesses if weights is empty!")
+        weight_thickness = False
+
+    # Determine if we will annotate the network
+    if not annotate:
+        node_labels = []
+        weights = []
+        biases = []
+
     # generate some default node labels
     if node_labels is None:
         node_labels = []
@@ -36,7 +46,7 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
                 node_labels.append([f'$x_{j+shift}$' for j in range(nℓ)])
             else:
                 node_labels.append([r'$a^{' + f'{ℓ}' + r'}_{' + f'{j+shift}' + r'}$' for j in range(nℓ)])
-                
+
     # generate default bias labels
     if weights is None:
         weights = []
@@ -90,7 +100,7 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
     ℓ = 0
     for st, et in zip(seq_list[:-1], seq_list[1:]):
         
-        if not weight_thickness:
+        if not weight_thickness or not annotate:
             c = connecta2a(st, et, eb)
             if weights:
 
@@ -135,11 +145,12 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
 
         ℓ += 1
         
+# --------------------------------------------------------------------------
 def draw_network(num_node_list,node_labels=None,weights=None,biases=None,zero_index=False, weight_thickness=False, 
-                feed_forward=True):
+                feed_forward=True, annotate=True):
     fig = plt.figure()
     ax = fig.gca()
-    draw_feed_forward(ax, num_node_list=num_node_list, node_labels=node_labels,weights=weights, biases=biases, zero_index=zero_index, weight_thickness=weight_thickness, feed_forward=feed_forward)
+    draw_feed_forward(ax, num_node_list=num_node_list, node_labels=node_labels,weights=weights, biases=biases, zero_index=zero_index, weight_thickness=weight_thickness, feed_forward=feed_forward,annotate=annotate)
     ax.axis('off')
     ax.set_aspect('equal')
     plt.show()
