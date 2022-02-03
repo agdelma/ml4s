@@ -7,8 +7,8 @@ import matplotlib.patheffects as path_effects
 from viznet import connecta2a, node_sequence, NodeBrush, EdgeBrush, DynamicShow,theme
 
 # --------------------------------------------------------------------------
-def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=None, zero_index=False, 
-                     weight_thickness=False, feed_forward=True,annotate=True):
+def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=None, 
+                      zero_index=True, weight_thickness=False, feed_forward=True,annotate=True):
     '''
     draw a feed forward neural network.
 
@@ -146,8 +146,8 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
         ℓ += 1
         
 # --------------------------------------------------------------------------
-def draw_network(num_node_list,node_labels=None,weights=None,biases=None,zero_index=False, weight_thickness=False, 
-                feed_forward=True, annotate=True):
+def draw_network(num_node_list,node_labels=None,weights=None,biases=None,zero_index=True, 
+             weight_thickness=False, feed_forward=True, annotate=True):
     fig = plt.figure()
     ax = fig.gca()
     draw_feed_forward(ax, num_node_list=num_node_list, node_labels=node_labels,weights=weights, biases=biases, zero_index=zero_index, weight_thickness=weight_thickness, feed_forward=feed_forward,annotate=annotate)
