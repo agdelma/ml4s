@@ -103,6 +103,9 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
         if not weight_thickness or not annotate:
             c = connecta2a(st, et, eb)
             if weights:
+                if isinstance(weights, list):
+                    weights = np.array(weights)
+
 
                 w = weights[ℓ]
 
