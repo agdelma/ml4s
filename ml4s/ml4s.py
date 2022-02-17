@@ -59,8 +59,8 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
                         w_lab[k,j] = r'$w^{' + f'{ℓ}' + r'}_{' + f'{k+shift}{j+shift}' + r'}$'
                 weights.append(w_lab)
                     
-    if isinstance(weights, list):
-        weights = np.array(weights)
+    # if isinstance(weights, list):
+    #     weights = np.array(weights)
 
     # generate some default weight labels
     if biases is None:
@@ -105,7 +105,7 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
         
         if not weight_thickness or not annotate:
             c = connecta2a(st, et, eb)
-            if weights.size > 0:
+            if len(weights)>0
                 w = weights[ℓ]
 
                 if isinstance(w,np.ndarray):
