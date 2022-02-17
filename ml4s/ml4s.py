@@ -117,7 +117,8 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
                     factor = 1
 
                     # get the input and output neuron indices
-                    idx = np.unravel_index(k,weights[ℓ].shape)
+                    #idx = np.unravel_index(k,weights[ℓ].shape)
+                    idx = np.unravel_index(k,w.shape)
                     if idx[0]%2:
                         factor = -1
 
