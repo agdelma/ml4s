@@ -105,9 +105,12 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
         
         if not weight_thickness or not annotate:
             c = connecta2a(st, et, eb)
-            if weights:
+            if len(weights)>0:
 
-                w = weights[ℓ]
+                if isinstance(weights[ℓ], list):
+                    w = np.array(weights[ℓ])
+                else:
+                    w = weights[ℓ]
 
                 if isinstance(w,np.ndarray):
                     w = w.flatten()
@@ -117,7 +120,8 @@ def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=N
                     factor = 1
 
                     # get the input and output neuron indices
-                    idx = np.unravel_index(k,weights[ℓ].shape)
+                    #idx = np.unravel_index(k,weights[ℓ].shape)
+                    idx = np.unravel_index(k,w.shape)
                     if idx[0]%2:
                         factor = -1
 
