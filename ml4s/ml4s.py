@@ -266,6 +266,32 @@ def plot_2D_function(grid_x0,grid_x1, func, contours=50, log_contours=False, exa
     return fig,ax,ax3d
 
 # --------------------------------------------------------------------------
+from IPython import display
+def mdtex(eqn):
+    '''Return latex as markdown.'''
+    return display.display(display.Markdown(eqn))
+    
+# --------------------------------------------------------------------------
+def plot_min_trajectory(fig,ax,ax3d,w_traj,func,log_contours=False):
+    '''Plot the trajectory of a minimization.'''
+    
+    num_iter = w_traj.shape[0]
+    f_traj = np.array([func(w_traj[i,:]) for i in range(num_iter)])
+    
+    ax.plot(w_traj[0,0],w_traj[0,1], 'o', color='k', ms=6)    
+    ax.plot(w_traj[:,0],w_traj[:,1], '.', color='k', ms=1)  
+    
+    if log_contours:
+        f_traj = np.log(f_traj)
+        
+    ax3d.plot([w_traj[0,0]], [w_traj[0,1]], [f_traj[0]], marker='o', ms=6, linestyle='-', color='k',lw=1, zorder=100)
+    ax3d.plot(w_traj[:,0], w_traj[:,1], f_traj, marker='.', ms=1, linestyle='-', color='k',lw=1, zorder=100)
+    
+    ax.set_title(f'$i={i}, w=[{w[0]:.2f},{w[1]:.2f}]$' + '\n' + f'$C(w) = {func(w):.6f}$', fontsize=14);
+    
+    return fig,ax,ax3d
+
+# --------------------------------------------------------------------------
 def feed_forward(aₒ,w,b,ffprime):
     '''Propagate an input vector x = aₒ through 
        a network with weights (w) and biases (b).
