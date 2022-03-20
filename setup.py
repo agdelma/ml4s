@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setuptools.setup(
     name='ml4s',
-    version='0.5.0',
+    version='0.6.0',
     packages=setuptools.find_packages(),
     license='MIT',
     description='A python package implenting useful utilities for an introductory machine learning course taught at the University of Tennessee.',

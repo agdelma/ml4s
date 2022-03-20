@@ -9,6 +9,7 @@ from mpl_toolkits.mplot3d import proj3d
 from matplotlib.colors import LogNorm
 from matplotlib.patches import FancyArrowPatch
 from viznet import connecta2a, node_sequence, NodeBrush, EdgeBrush, DynamicShow,theme
+from IPython.display import clear_output
 
 # --------------------------------------------------------------------------
 def draw_feed_forward(ax, num_node_list, node_labels=None, weights=None,biases=None, 
@@ -292,6 +293,38 @@ def plot_min_trajectory(fig,ax,ax3d,w_traj,func,log_contours=False):
     return fig,ax,ax3d
 
 # --------------------------------------------------------------------------
+def plot_training_2D(aL,y,costs):
+    '''Plot the current stage of training on a 2D function. 
+
+    Inputs:
+        aL   : the current best prediction of the DNN.
+        y    : the target function.
+        costs: the current history of the cost function.
+    '''
+    clear_output(wait=True)
+
+    fig,ax = plt.subplots(ncols=3,nrows=1,figsize=(10,4))
+
+    ax[1].axis('off')
+    img = ax[1].imshow(aL, cmap='Spectral_r', rasterized=True, 
+                       interpolation='nearest', origin='lower', aspect='equal')
+
+    ax[2].axis('off')
+    ax[2].imshow(y, cmap='Spectral_r', rasterized=True, 
+                 interpolation='nearest', origin='lower', aspect='equal')
+
+    ax[0].plot(costs)
+
+    ax[0].set_title("Current Cost")
+    ax[0].set_xlabel("Batch Number")
+    ax[1].set_title("Current Prediction")
+    ax[2].set_title("Target")
+
+    plt.show()
+
+    return fig,ax
+
+# --------------------------------------------------------------------------
 def feed_forward(aₒ,w,b,ffprime):
     '''Propagate an input vector x = aₒ through 
        a network with weights (w) and biases (b).
@@ -418,7 +451,6 @@ def make_batch(n,batch_size,extent,func):
 
 #  2021-04-20 Plotting code added, modified from F. Marquardt
 #  https://github.com/FlorianMarquardt/machine-learning-for-physicists
-from IPython.display import clear_output
 
 # --------------------------------------------------------------------------
 def Hbeta(D=np.array([]), beta=1.0):
