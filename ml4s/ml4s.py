@@ -313,7 +313,15 @@ def plot_training_2D(aL,y,costs):
     ax[2].imshow(y, cmap='Spectral_r', rasterized=True, 
                  interpolation='nearest', origin='lower', aspect='equal')
 
-    ax[0].plot(costs)
+    # determine the current average cost
+    idx = np.count_nonzero(costs)
+    if idx >= 10:
+        ave_cost = np.average(costs[idx-10:idx])
+    else:
+        ave_cost = costs[idx]
+
+    ax[0].plot(costs, label=f'train = {ave_cost:.3g}')
+    ax[0].legend()
 
     ax[0].set_title("Current Cost")
     ax[0].set_xlabel("Batch Number")
