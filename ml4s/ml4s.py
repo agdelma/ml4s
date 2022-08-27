@@ -214,7 +214,7 @@ def random_psd_matrix(size,seed=None):
     
     A = np.random.randn(*size)
     A = A.T @ A
-    #A = A.T @ A
+    A = A.T @ A
     A = A / np.linalg.norm(A)
     return A
 
