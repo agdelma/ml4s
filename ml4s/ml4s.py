@@ -227,9 +227,10 @@ def plot_2D_function(grid_x0,grid_x1, func, contours=50, log_contours=False, exa
     Z = np.zeros_like(X)
     
     # numpy bonus exercise: can you think of a way to vectorize the following for-loop?
-    for i in range(len(X)):
-        for j in range(len(X.T)):
-            Z[i, j] = func(np.array((X[i, j], Y[i, j])))  # compute function values
+    #for i in range(len(X)):
+    #    for j in range(len(X.T)):
+    #        Z[i, j] = func(np.array((X[i, j], Y[i, j])))  # compute function values
+    Z = np.array(list(map(func, X, Y)))
     
     fig = plt.figure(figsize=plt.figaspect(0.5))
     ax = fig.add_subplot(1, 2, 1)
